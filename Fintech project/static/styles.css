@@ -36,7 +36,7 @@ h2 {
   justify-content: center;
   height: auto;
   min-height: calc(100vh - 80px);
-  background: linear-gradient(135deg, #74ebd5, #9face6);
+  background: linear-gradient(135deg, #74ebd5, #2843be);
   color: white;
   text-align: center;
 }
