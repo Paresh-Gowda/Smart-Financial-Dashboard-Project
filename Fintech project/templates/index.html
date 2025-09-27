@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Finance Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <h1>Smart Finance Dashboard</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('savings')">Savings</a></li>
+        <li><a href="#" onclick="showPage('expenses')">Expenses</a></li>
+        <li><a href="#" onclick="showPage('analytics')">Data Analytics</a></li>
+        <li><a href="#" onclick="showPage('investments')">Investments</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <!-- Home Section -->
+<section id="home" class="page active">
+  <div class="hero" style="text-align:center; padding:2rem;">
+   <img src="{{ url_for('static', filename='images/fintech.jpg') }}" 
+     alt="Fintech"
+     style="width:95%; max-width:600px; height:400px; display:block; margin:auto; border-radius:12px;">
+    <h2 style="margin-top:1rem; color:#2c3e50;">Welcome to Smart Finance 💡</h2>
+    <p style="color:#34495e;">Track your profile, expenses, savings & investments — all in one place.</p>
+    <div class="pulse"></div>
+  </div>
+</section>
+
+  <!-- Expenses Section -->
+  <section id="expenses" class="page">
+    <h2>🧾 Expenses</h2>
+    <div class="card">
+
+      <!-- Salary Form -->
+      <form id="salary-form">
+        <input type="number" name="salary" placeholder="Enter Salary" required>
+        <button type="submit">Set Salary</button>
+      </form>
+
+      <!-- Add Expense Form -->
+      <form id="expense-form">
+        <input type="text" name="title" placeholder="Expense Name" required>
+        <input type="number" name="amount" placeholder="Amount" required>
+        <button type="submit">Add Expense</button>
+      </form>
+
+      <!-- Clear Expenses Button -->
+      <button id="clear-expenses">Clear All Expenses</button>
+
+      <!-- Expense List -->
+      <ul id="expense-list"></ul>
+      <h3>Total: <span id="total-expense">0</span></h3>
+      <p id="salary-info"></p>
+    </div>
+  </section>
+
+  <!-- Analytics Section -->
+  <section id="analytics" class="page">
+    <h2>📊 Data Analytics</h2>
+    <div class="card">
+      <canvas id="analyticsChart" width="400" height="200"></canvas>
+      <h3>Remaining Salary: <span id="remaining-salary">0</span></h3>
+    </div>
+  </section>
+
+  <!-- Investments Section -->
+  <section id="investments" class="page">
+    <h2>📈 Investment Suggestions</h2>
+    <div class="card">
+      <button onclick="suggestInvestment()">Get Suggestions</button>
+      <div id="investment-suggestions"></div>
+    </div>
+  </section>
+
+  <!-- Savings Section -->
+  <section id="savings" class="page">
+    <h2>💰 Savings Dashboard</h2>
+
+    <!-- Summary -->
+    <div id="savings-summary" class="card">
+      <p><b>Salary:</b> ₹<span id="summary-salary">0</span></p>
+      <p><b>Expenses:</b> ₹<span id="summary-expenses">0</span></p>
+      <p><b>Savings:</b> ₹<span id="summary-savings">0</span></p>
+      <p><b>Potential Savings:</b> ₹<span id="summary-potential">0</span></p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div style="width:100%; background:#eee; height:18px; border-radius:8px; margin:12px 0;">
+      <div id="savings-progress" style="height:100%; width:0; background:#27ae60; border-radius:8px;"></div>
+    </div>
+    <p id="savings-percent" style="margin-top:0.25rem;"></p>
+
+    <!-- Column Chart -->
+    <div class="card">
+      <canvas id="savingsChart" width="600" height="300"></canvas>
+    </div>
+  </section>
+</body>
+</html>
