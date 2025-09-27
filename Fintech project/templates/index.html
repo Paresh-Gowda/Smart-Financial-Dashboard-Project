@@ -25,7 +25,6 @@
   </header>
 
   <!-- Home Section -->
-  <!-- Home Section -->
 <section id="home" class="page active">
   <div class="hero" style="text-align:center; padding:2rem;">
    <img src="{{ url_for('static', filename='images/images.jpg') }}" 
@@ -69,19 +68,54 @@
   <section id="analytics" class="page">
     <h2>📊 Data Analytics</h2>
     <div class="card">
-      <canvas id="analyticsChart" width="400" height="200"></canvas>
+      <canvas id="analyticsChart" width="200" height="50"></canvas>
       <h3>Remaining Salary: <span id="remaining-salary">0</span></h3>
     </div>
   </section>
 
   <!-- Investments Section -->
-  <section id="investments" class="page">
-    <h2>📈 Investment Suggestions</h2>
-    <div class="card">
-      <button onclick="suggestInvestment()">Get Suggestions</button>
-      <div id="investment-suggestions"></div>
+<section id="investments" class="page">
+  <div style="text-align:center; padding:2rem;">
+    <h2 style="color:#2c3e50;">💹 Smart Investment Options</h2>
+    <p style="color:#34495e;">Explore trusted platforms to grow your money wisely.</p>
+
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; margin-top:2rem;">
+      
+      <!-- Mutual Funds -->
+      <a href="https://www.groww.in/mutual-funds" target="_blank" style="text-decoration:none;">
+        <div style="width:250px; padding:1rem; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); background:#f9f9f9; text-align:center;">
+          <h3 style="color:#27ae60;">📈 Mutual Funds</h3>
+          <p style="color:#555;">Diversify your money with long-term returns.</p>
+        </div>
+      </a>
+
+      <!-- Fixed Deposits -->
+      <a href="https://www.hdfcbank.com/personal/resources/fixed-deposit" target="_blank" style="text-decoration:none;">
+        <div style="width:250px; padding:1rem; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); background:#f9f9f9; text-align:center;">
+          <h3 style="color:#2980b9;">🏦 Fixed Deposits</h3>
+          <p style="color:#555;">Secure and stable investment with guaranteed returns.</p>
+        </div>
+      </a>
+
+      <!-- Stocks -->
+      <a href="https://zerodha.com/" target="_blank" style="text-decoration:none;">
+        <div style="width:250px; padding:1rem; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); background:#f9f9f9; text-align:center;">
+          <h3 style="color:#e67e22;">💹 Stock Market</h3>
+          <p style="color:#555;">Trade and invest in stocks to build wealth.</p>
+        </div>
+      </a>
+
+      <!-- Crypto -->
+      <a href="https://www.coinbase.com/" target="_blank" style="text-decoration:none;">
+        <div style="width:250px; padding:1rem; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); background:#f9f9f9; text-align:center;">
+          <h3 style="color:#8e44ad;">🪙 Crypto</h3>
+          <p style="color:#555;">Invest in digital assets for high-risk, high-reward gains.</p>
+        </div>
+      </a>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Savings Section -->
   <section id="savings" class="page">

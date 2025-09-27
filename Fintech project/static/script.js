@@ -189,3 +189,24 @@ document.addEventListener("DOMContentLoaded", () => {
   loadExpensesList();
   loadAnalytics();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    let ctx = document.getElementById("budgetChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "pie", // or "doughnut", "bar"
+        data: {
+            labels: ["Rent (15%)", "Groceries (5%)", "Savings (50%)", "Investments (30%)"],
+            datasets: [{
+                data: [7500, 2500, 25000, 15000], // Example for ₹50,000 salary
+                backgroundColor: ["#ff6384", "#36a2eb", "#4bc0c0", "#ffcd56"]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: "bottom" }
+            }
+        }
+    });
+});

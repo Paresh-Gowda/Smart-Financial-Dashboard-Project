@@ -160,3 +160,41 @@ if __name__ == "__main__":
     conn.close()
 
     app.run(debug=True)
+
+@app.route("/allocate_salary", methods=["POST"])
+def allocate_salary():
+    salary = float(request.form.get("salary", 0))
+
+    allocations = {
+        "Rent": round(salary * 0.15, 2),
+        "Groceries": round(salary * 0.05, 2),
+        "Savings": round(salary * 0.20, 2),
+        "Investments": round(salary * 0.20, 2),
+        "Emergency Fund": round(salary * 0.10, 2),
+        "Lifestyle": round(salary * 0.30, 2)
+    }
+
+    conn = get_db()
+    c = conn.cursor()
+
+    # Create table if not exists
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS budget_allocation (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            category TEXT,
+            amount REAL
+        )
+    """)
+
+    # Clear old data
+    c.execute("DELETE FROM budget_allocation")
+
+    # Insert new allocation
+    for category, amount in allocations.items():
+        c.execute("INSERT INTO budget_allocation (category, amount) VALUES (?, ?)", (category, amount))
+
+    conn.commit()
+    conn.close()
+
+    return jsonify({"status": "success", "allocations": allocations})
+
