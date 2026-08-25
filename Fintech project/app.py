@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, jsonify
 import sqlite3
 
@@ -133,34 +134,7 @@ def api_dashboard():
         "potential_savings": potential_savings
     })
 
-# ---------- Init & Run ----------
-if __name__ == "__main__":
-    conn = get_db()
-    c = conn.cursor()
-    c.execute("""
-        CREATE TABLE IF NOT EXISTS profile (
-            id INTEGER PRIMARY KEY,
-            name TEXT,
-            email TEXT,
-            income INTEGER
-        )
-    """)
-    c.execute("""
-        CREATE TABLE IF NOT EXISTS expenses (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT,
-            amount INTEGER
-        )
-    """)
-    # Ensure one profile exists
-    c.execute("SELECT id FROM profile WHERE id=1")
-    if not c.fetchone():
-        c.execute("INSERT INTO profile (id, name, email, income) VALUES (1, '', '', 30000)")
-    conn.commit()
-    conn.close()
-
-    app.run(debug=True)
-
+# ---------- Salary Allocation ----------
 @app.route("/allocate_salary", methods=["POST"])
 def allocate_salary():
     salary = float(request.form.get("salary", 0))
@@ -177,7 +151,6 @@ def allocate_salary():
     conn = get_db()
     c = conn.cursor()
 
-    # Create table if not exists
     c.execute("""
         CREATE TABLE IF NOT EXISTS budget_allocation (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -186,10 +159,8 @@ def allocate_salary():
         )
     """)
 
-    # Clear old data
     c.execute("DELETE FROM budget_allocation")
 
-    # Insert new allocation
     for category, amount in allocations.items():
         c.execute("INSERT INTO budget_allocation (category, amount) VALUES (?, ?)", (category, amount))
 
@@ -198,3 +169,33 @@ def allocate_salary():
 
     return jsonify({"status": "success", "allocations": allocations})
 
+# ---------- Init & Run ----------
+if __name__ == "__main__":
+    conn = get_db()
+    c = conn.cursor()
+
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS profile (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            email TEXT,
+            income INTEGER
+        )
+    """)
+
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS expenses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            amount INTEGER
+        )
+    """)
+
+    c.execute("SELECT id FROM profile WHERE id=1")
+    if not c.fetchone():
+        c.execute("INSERT INTO profile (id, name, email, income) VALUES (1, '', '', 30000)")
+
+    conn.commit()
+    conn.close()
+
+    app.run(debug=True)
