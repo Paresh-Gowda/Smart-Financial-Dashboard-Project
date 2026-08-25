@@ -1,5 +1,8 @@
 # 💰 Smart Finance Dashboard
 
+## 🔗 Live Demo
+[View Project](https://smart-financial-dashboard-project.onrender.com/)
+
 Smart Finance Dashboard is a simple yet effective web application that helps individuals take control of their personal finances.
 By providing an organized way to record salary, expenses, and savings, it gives users a clear overview of their financial status in one place.
 The goal of the project is to make money management easier, smarter, and more transparent for everyday users.
